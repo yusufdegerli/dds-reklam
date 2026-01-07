@@ -19,11 +19,11 @@ const References = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-24 items-center">
           {referenceLogos.map((logo, idx) => (
-            <div key={idx} className="group bg-white/5 p-8 rounded-2xl border border-white/10 flex items-center justify-center transition-all duration-300 hover:bg-white/10 hover:border-brand-red/30 h-48">
+            <div key={idx} className="group bg-[#242435] p-8 rounded-2xl border border-white/5 flex items-center justify-center transition-all duration-500 hover:bg-[#2a2a3f] hover:border-brand-red/30 hover:-translate-y-2 h-48 shadow-xl">
               <img 
                 src={`/references/${logo}`} 
                 alt={logo.split('.')[0]} 
-                className="max-h-full max-w-full object-contain filter brightness-0 invert opacity-50 group-hover:opacity-100 transition-all duration-500 scale-110 group-hover:scale-125"
+                className="max-h-full max-w-full object-contain filter grayscale brightness-125 contrast-125 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500 opacity-60 group-hover:opacity-100 scale-100 group-hover:scale-110"
               />
             </div>
           ))}
