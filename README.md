@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# DDS Reklam - Kurumsal Web Sitesi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DDS Reklam için geliştirilmiş; modern, etkileşimli ve kurumsal kimliği yansıtan web sitesi projesi.
 
-Currently, two official plugins are available:
+![Project Status](https://img.shields.io/badge/status-active-success.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Proje Hakkında
 
-## React Compiler
+Bu proje, DDS Reklam ajansının hizmetlerini, projelerini ve referanslarını sergilemek amacıyla geliştirilmiştir. Kullanıcı deneyimini (UX) ön planda tutan, **Glassmorphism** ve **Flat Design 2.0** tasarım dillerinin harmanlandığı modern bir arayüze sahiptir.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### Öne Çıkan Özellikler
 
-## Expanding the ESLint configuration
+*   **🎨 Modern Tasarım:** Glassmorphism efektleri ve temiz flat tasarım.
+*   **🧊 3D Entegrasyonu:** Three.js ile etkileşimli 3D görselleştirmeler.
+*   **📱 Tam Duyarlı (Responsive):** Mobil, tablet ve masaüstü uyumlu.
+*   **⚡ Hızlı ve Performanslı:** Vite ve React altyapısı.
+*   **✨ Mikro Etkileşimler:** Hover efektleri, yumuşak geçişler ve animasyonlar.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Teknolojiler
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Projede kullanılan temel kütüphane ve araçlar:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+*   **Core:** [React](https://reactjs.org/) (TypeScript ile)
+*   **Build Tool:** [Vite](https://vitejs.dev/)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **3D Graphics:** [Three.js](https://threejs.org/) & [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
+*   **Routing:** [React Router DOM](https://reactrouter.com/)
+*   **Icons:** [Lucide React](https://lucide.dev/)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📂 Proje Yapısı
+
+```bash
+src/
+├── components/   # Navbar, Footer, ScrollToTop vb. bileşenler
+├── layouts/      # Ana sayfa düzeni (MainLayout)
+├── pages/        # Sayfa içerikleri (Home, About, Services, vb.)
+├── assets/       # Görseller ve statik dosyalar
+└── main.tsx      # Uygulama giriş noktası
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Kurulum ve Çalıştırma
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1.  **Depoyu klonlayın:**
+    ```bash
+    git clone <repo-url>
+    cd dds-reklam
+    ```
+
+2.  **Bağımlılıkları yükleyin:**
+    ```bash
+    npm install
+    ```
+
+3.  **Geliştirme sunucusunu başlatın:**
+    ```bash
+    npm run dev
+    ```
+    Tarayıcınızda `http://localhost:5173` adresine gidin.
+
+## 🏗️ Build (Canlıya Alma)
+
+Projeyi canlı sunucuya atmak (production build) için:
+
+```bash
+npm run build
 ```
+Bu komut `dist` klasörü içerisinde optimize edilmiş dosyaları oluşturacaktır.
+
+## 🎨 Renk Paleti
+
+*   **Koyu Lacivert:** `#1B1B28` (Arka planlar, Header)
+*   **Ana Kırmızı:** `#E0020E` (Butonlar, Vurgular)
+*   **Nude/Pembe:** `#DAB9BC`, `#ED6C73` (Detaylar, İkincil öğeler)
+*   **Beyaz:** `#FDFDFD` (Kart zeminleri, Metinler)
+
+---
+© 2026 DDS Reklam. Tüm hakları saklıdır.
