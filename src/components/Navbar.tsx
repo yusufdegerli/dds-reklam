@@ -7,17 +7,10 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Dark background pages where text should always be white initially
-  const isDarkPage = location.pathname === '/' || location.pathname === '/contact';
-
-  // Determine text color based on scroll and page type
-  // If scrolled OR it's a dark page, use white text. Otherwise (light page at top), use dark text.
-  const textColorClass = (scrolled || isDarkPage) ? 'text-white' : 'text-brand-dark';
   const navBackgroundClass = scrolled 
     ? 'bg-brand-dark/95 backdrop-blur-md shadow-lg border-b border-white/5 py-2' 
     : 'bg-transparent py-4';
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -39,29 +32,24 @@ const Navbar = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${navBackgroundClass}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <div className="flex-shrink-0 flex items-center group cursor-pointer">
             <Link to="/" className="text-2xl font-bold tracking-wider group-hover:scale-105 transition-transform duration-300">
-              <span className={`transition-colors duration-300 ${textColorClass}`}>DDS</span>
+              <span className="text-white">DDS</span>
               <span className="text-brand-red drop-shadow-[0_0_8px_rgba(224,2,14,0.5)]">REKLAM</span>
             </Link>
           </div>
           
-          {/* Desktop Menu */}
           <div className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-1">
               {links.map((link) => {
                 const isActive = location.pathname === link.path;
-                // Link text color logic matches logo logic
-                const linkColor = isActive 
-                  ? 'text-brand-red bg-brand-red/10' 
-                  : `${textColorClass} hover:bg-brand-red/10`;
-
                 return (
                   <Link
                     key={link.name}
                     to={link.path}
-                    className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 group overflow-hidden flex items-center gap-2 ${linkColor}`}
+                    className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 group overflow-hidden flex items-center gap-2 ${
+                      isActive ? 'text-brand-red bg-brand-red/10' : 'text-brand-gray hover:text-white hover:bg-white/5'
+                    }`}
                   >
                     {link.icon}
                     {link.name}
@@ -71,11 +59,10 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile menu button */}
           <div className="-mr-2 flex lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`inline-flex items-center justify-center p-2 rounded-md hover:bg-white/10 focus:outline-none transition-colors ${textColorClass}`}
+              className="inline-flex items-center justify-center p-2 rounded-md text-brand-gray hover:text-white hover:bg-white/10 focus:outline-none transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -83,7 +70,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="bg-brand-dark/95 backdrop-blur-xl border-t border-white/10 px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-2xl">
           {links.map((link) => (
