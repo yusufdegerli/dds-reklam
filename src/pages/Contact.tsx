@@ -1,6 +1,37 @@
+import { useState, type FormEvent } from 'react';
 import { Mail, MapPin, Phone, Send, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    subject: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    
+    // Construct the mailto link
+    const { name, subject, email, message } = formData;
+    const body = `Ad Soyad: ${name}%0D%0AE-Posta: ${email}%0D%0A%0D%0AMesaj:%0D%0A${message}`;
+    const mailtoLink = `mailto:info@ddsreklam.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    
+    // Open the email client
+    window.location.href = mailtoLink;
+
+    // Optional: Reset form or show a simple feedback
+    alert("E-posta istemciniz açılıyor...");
+  };
+
   return (
     <div className="min-h-screen bg-brand-dark relative overflow-hidden pt-24 pb-12 flex flex-col justify-center">
        {/* Background Elements */}
@@ -79,29 +110,61 @@ const Contact = () => {
             <h2 className="text-2xl font-bold text-white mb-2">Bize Yazın</h2>
             <p className="text-brand-gray mb-8">Size en kısa sürede dönüş yapacağız.</p>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm text-brand-gray ml-1">Adınız</label>
-                  <input type="text" className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20" placeholder="John Doe" />
+                  <input 
+                    type="text" 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20" 
+                    placeholder="John Doe" 
+                  />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm text-brand-gray ml-1">Konu</label>
-                  <input type="text" className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20" placeholder="Proje Teklifi" />
+                  <input 
+                    type="text" 
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20" 
+                    placeholder="Proje Teklifi" 
+                  />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm text-brand-gray ml-1">E-Posta</label>
-                <input type="email" className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20" placeholder="ornek@sirket.com" />
+                <input 
+                  type="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20" 
+                  placeholder="ornek@sirket.com" 
+                />
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm text-brand-gray ml-1">Mesajınız</label>
-                <textarea rows={4} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20 resize-none" placeholder="Projenizden bahsedin..."></textarea>
+                <textarea 
+                  rows={4} 
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20 resize-none" 
+                  placeholder="Projenizden bahsedin..."
+                ></textarea>
               </div>
 
-              <button type="button" className="w-full bg-brand-red hover:bg-brand-pink text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgba(224,2,14,0.39)] hover:shadow-[0_6px_20px_rgba(224,2,14,0.23)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+              <button type="submit" className="w-full bg-brand-red hover:bg-brand-pink text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgba(224,2,14,0.39)] hover:shadow-[0_6px_20px_rgba(224,2,14,0.23)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
                 Gönder
                 <Send size={18} />
               </button>
