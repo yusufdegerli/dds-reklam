@@ -17,9 +17,9 @@ const References = () => {
           <p className="text-brand-gray">Başarı hikayelerini birlikte yazdığımız değerli iş ortaklarımız.</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-24 items-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 mb-24 items-center">
           {referenceLogos.map((logo, idx) => (
-            <div key={idx} className="group bg-[#242435] p-8 rounded-2xl border border-white/5 flex items-center justify-center transition-all duration-500 hover:bg-[#2a2a3f] hover:border-brand-red/30 hover:-translate-y-2 h-48 shadow-xl">
+            <div key={idx} className="group bg-[#242435] p-4 sm:p-8 rounded-2xl border border-white/5 flex items-center justify-center transition-all duration-500 hover:bg-[#2a2a3f] hover:border-brand-red/30 hover:-translate-y-2 h-32 sm:h-48 shadow-xl">
               <img 
                 src={`/references/${logo}`} 
                 alt={logo.split('.')[0]} 

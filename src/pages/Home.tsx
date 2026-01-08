@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <div className="flex flex-col min-h-screen bg-brand-dark text-white selection:bg-brand-red selection:text-white">
       {/* Hero Section with Glassmorphism */}
-      <section className="relative h-screen min-h-[700px] flex items-center pt-32 overflow-hidden">
+      <section className="relative h-screen min-h-[85vh] md:min-h-screen flex items-center pt-20 md:pt-32 overflow-hidden">
         
         {/* Background Elements */}
         <div className="absolute inset-0 z-0">
@@ -51,27 +51,27 @@ const Home = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-none">
           <div className="max-w-4xl pointer-events-auto">
             {/* Glass Card */}
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-fade-in-up">
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-6 sm:p-8 md:p-12 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-fade-in-up">
               <div className="inline-block px-4 py-1 rounded-full bg-brand-red/10 border border-brand-red/20 text-brand-red text-sm font-semibold mb-6 tracking-wide">
                 DDS REKLAM
               </div>
               
-              <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-nude to-brand-gray mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-nude to-brand-gray mb-6 leading-tight">
                 Markanızın Sesi <br />
                 <span className="text-brand-red drop-shadow-lg">Yüksek Çıksın</span>
               </h1>
               
-              <p className="text-xl text-brand-gray mb-8 max-w-2xl leading-relaxed">
+              <p className="text-lg md:text-xl text-brand-gray mb-8 max-w-2xl leading-relaxed">
                 Yaratıcı stratejiler ve yenilikçi medya çözümleriyle markanızı hedef kitlenizle buluşturuyoruz. 
                 Geleceğin reklamcılığını bugünden deneyimleyin.
               </p>
               
-              <div className="flex flex-wrap gap-4">
-                <Link to="/projects" className="group relative bg-brand-red hover:bg-brand-pink text-white px-8 py-4 rounded-xl font-semibold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(224,2,14,0.4)] hover:shadow-[0_0_30px_rgba(224,2,14,0.6)] hover:-translate-y-1">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/projects" className="group relative bg-brand-red hover:bg-brand-pink text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(224,2,14,0.4)] hover:shadow-[0_0_30px_rgba(224,2,14,0.6)] hover:-translate-y-1">
                   Projelerimizi Keşfet
                   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <Link to="/contact" className="group relative px-8 py-4 rounded-xl font-semibold flex items-center gap-2 transition-all bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 backdrop-blur-md hover:-translate-y-1">
+                <Link to="/contact" className="group relative px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 backdrop-blur-md hover:-translate-y-1">
                   Bize Ulaşın
                 </Link>
               </div>

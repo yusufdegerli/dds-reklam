@@ -58,7 +58,7 @@ const Services = () => {
           {services.map((service, idx) => (
             <div 
               key={idx} 
-              className="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-red/30 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden"
+              className="group p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-red/30 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden"
             >
               <div className={`mb-6 inline-block p-4 rounded-xl ${service.color} ${service.iconColor}`}>
                 {service.icon}

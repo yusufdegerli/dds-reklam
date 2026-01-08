@@ -8,10 +8,10 @@ const About = () => {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <span className="text-brand-red font-semibold tracking-wider uppercase text-sm mb-2 block animate-fade-in">Hikayemiz</span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             Tutkuyla Tasarlıyor, <br/> Stratejiyle Büyütüyoruz.
           </h1>
-          <p className="text-lg text-brand-gray leading-relaxed">
+          <p className="text-base sm:text-lg text-brand-gray leading-relaxed">
             Yılların getirdiği deneyimle, markaların hikayelerini en etkili şekilde anlatmak ve dijital dünyada kalıcı izler bırakmak için çalışıyoruz.
           </p>
         </div>
@@ -55,7 +55,7 @@ const About = () => {
                 { title: 'Başarılı Kampanyalar', desc: 'Sektörde ses getiren 500+ proje.', icon: <Award size={32} /> },
                 { title: 'Müşteri Odaklılık', desc: 'Markanızın hedeflerini kendi hedefimiz sayıyoruz.', icon: <Target size={32} /> },
             ].map((item, idx) => (
-                <div key={idx} className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-brand-red/30 transition-all duration-300 group">
+                <div key={idx} className="bg-white/5 p-6 sm:p-8 rounded-2xl border border-white/10 hover:border-brand-red/30 transition-all duration-300 group">
                     <div className="mb-6 inline-block p-4 rounded-2xl bg-white/5 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
                         {item.icon}
                     </div>
