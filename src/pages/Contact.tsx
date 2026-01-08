@@ -1,35 +1,41 @@
-import { useState, type FormEvent } from 'react';
-import { Mail, MapPin, Phone, Send, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { useState, useRef, type FormEvent } from 'react';
+import { Mail, MapPin, Phone, Send, Facebook, Twitter, Instagram, Linkedin, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    subject: '',
-    email: '',
-    message: ''
-  });
+  const formRef = useRef<HTMLFormElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
-    // Construct the mailto link
-    const { name, subject, email, message } = formData;
-    const body = `Ad Soyad: ${name}%0D%0AE-Posta: ${email}%0D%0A%0D%0AMesaj:%0D%0A${message}`;
-    const mailtoLink = `mailto:info@ddsreklam.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-    
-    // Open the email client
-    window.location.href = mailtoLink;
+    setLoading(true);
+    setStatus('idle');
 
-    // Optional: Reset form or show a simple feedback
-    alert("E-posta istemciniz açılıyor...");
+    // EmailJS Configuration
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (formRef.current) {
+      try {
+        await emailjs.sendForm(
+          SERVICE_ID,
+          TEMPLATE_ID,
+          formRef.current,
+          PUBLIC_KEY
+        );
+        setStatus('success');
+        if (formRef.current) formRef.current.reset();
+      } catch (error) {
+        console.error('Email error:', error);
+        setStatus('error');
+      } finally {
+        setLoading(false);
+        // 5 saniye sonra başarı/hata mesajını temizle
+        setTimeout(() => setStatus('idle'), 5000);
+      }
+    }
   };
 
   return (
@@ -106,19 +112,25 @@ const Contact = () => {
           </div>
 
           {/* Contact Form (Glass) */}
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+            {status === 'success' && (
+              <div className="absolute inset-0 z-50 bg-brand-dark/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-8 animate-fade-in">
+                <CheckCircle size={64} className="text-green-500 mb-4" />
+                <h3 className="text-2xl font-bold text-white mb-2">Mesajınız Gönderildi!</h3>
+                <p className="text-brand-gray">En kısa sürede sizinle iletişime geçeceğiz.</p>
+              </div>
+            )}
+            
             <h2 className="text-2xl font-bold text-white mb-2">Bize Yazın</h2>
             <p className="text-brand-gray mb-8">Size en kısa sürede dönüş yapacağız.</p>
 
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm text-brand-gray ml-1">Adınız</label>
                   <input 
                     type="text" 
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
+                    name="user_name"
                     required
                     className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20" 
                     placeholder="John Doe" 
@@ -129,8 +141,6 @@ const Contact = () => {
                   <input 
                     type="text" 
                     name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
                     required
                     className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20" 
                     placeholder="Proje Teklifi" 
@@ -142,9 +152,7 @@ const Contact = () => {
                 <label className="text-sm text-brand-gray ml-1">E-Posta</label>
                 <input 
                   type="email" 
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  name="user_email"
                   required
                   className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20" 
                   placeholder="ornek@sirket.com" 
@@ -156,17 +164,35 @@ const Contact = () => {
                 <textarea 
                   rows={4} 
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   required
                   className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red/50 focus:bg-black/30 transition-all placeholder:text-white/20 resize-none" 
                   placeholder="Projenizden bahsedin..."
                 ></textarea>
               </div>
 
-              <button type="submit" className="w-full bg-brand-red hover:bg-brand-pink text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgba(224,2,14,0.39)] hover:shadow-[0_6px_20px_rgba(224,2,14,0.23)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                Gönder
-                <Send size={18} />
+              {status === 'error' && (
+                <div className="flex items-center gap-2 text-red-500 bg-red-500/10 p-4 rounded-xl text-sm">
+                  <AlertCircle size={18} />
+                  <span>Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyiniz.</span>
+                </div>
+              )}
+
+              <button 
+                type="submit" 
+                disabled={loading}
+                className="w-full bg-brand-red hover:bg-brand-pink text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgba(224,2,14,0.39)] hover:shadow-[0_6px_20px_rgba(224,2,14,0.23)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" />
+                    Gönderiliyor...
+                  </>
+                ) : (
+                  <>
+                    Gönder
+                    <Send size={18} />
+                  </>
+                )}
               </button>
             </form>
           </div>
