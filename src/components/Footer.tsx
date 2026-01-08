@@ -50,7 +50,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="text-brand-red shrink-0" size={20} />
-                <span>İstanbul, Türkiye</span>
+                <span>Florya Cad. 38 / 7 Bakırköy, İstanbul</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="text-brand-red shrink-0" size={20} />
@@ -65,7 +65,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
-          <p>&copy; {new Date().getFullYear()} DDS Reklam. Tüm hakları saklıdır.</p>
+          <p>&copy; {new Date().getFullYear()} DDS REKLAM YAPI İNŞAAT TURİZM SANAYİ VE TİCARET LİMİTED ŞİRKETİ. Tüm hakları saklıdır.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-brand-white transition-colors">Gizlilik Politikası</a>
             <a href="#" className="hover:text-brand-white transition-colors">Kullanım Şartları</a>

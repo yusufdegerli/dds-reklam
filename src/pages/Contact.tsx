@@ -31,7 +31,9 @@ const Contact = () => {
                   <div>
                     <h3 className="text-white font-semibold mb-1">Adres</h3>
                     <p className="text-brand-gray leading-relaxed">
-                      Maslak Mah. Büyükdere Cad. <br /> No: 123/A Sarıyer, İstanbul
+                      Florya Cad. 38 / 7 Bakırköy <br />
+                      Şenlikköy, İstanbul 34153 <br />
+                      Türkiye
                     </p>
                   </div>
                 </div>

@@ -77,4 +77,4 @@ Bu komut `dist` klasörü içerisinde optimize edilmiş dosyaları oluşturacakt
 *   **Beyaz:** `#FDFDFD` (Kart zeminleri, Metinler)
 
 ---
-© 2026 DDS Reklam. Tüm hakları saklıdır.
+© 2026 DDS REKLAM YAPI İNŞAAT TURİZM SANAYİ VE TİCARET LİMİTED ŞİRKETİ. Tüm hakları saklıdır.
