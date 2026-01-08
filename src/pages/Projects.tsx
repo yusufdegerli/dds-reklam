@@ -1,8 +1,22 @@
-import { useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowUpRight, Loader2 } from 'lucide-react';
+import { client, urlFor } from '../sanity/client';
+import ProjectModal from '../components/ProjectModal';
+
+interface Project {
+  _id: string;
+  title: string;
+  category: string;
+  shortDescription: string;
+  description: string;
+  images: any[];
+}
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const categories = [
     { id: 'all', name: 'Tümü' },
@@ -11,19 +25,37 @@ const Projects = () => {
     { id: 'production', name: 'Prodüksiyon' },
   ];
 
-  const projects = [
-    { id: 1, title: 'Summer Fest 2025', category: 'campaign', catName: 'Kampanya', desc: '360 derece festival tanıtım.', color: 'bg-brand-red/20' },
-    { id: 2, title: 'Tech Summit Branding', category: 'digital', catName: 'Dijital', desc: 'Teknoloji zirvesi marka kimliği.', color: 'bg-brand-dark' },
-    { id: 3, title: 'Moda Haftası Filmi', category: 'production', catName: 'Prodüksiyon', desc: 'Sezonun en iyi reklam filmi.', color: 'bg-brand-pink/20' },
-    { id: 4, title: 'Eco-Life Lansmanı', category: 'campaign', catName: 'Kampanya', desc: 'Sürdürülebilirlik odaklı lansman.', color: 'bg-brand-nude/20' },
-    { id: 5, title: 'Mobil Uygulama Tasarımı', category: 'digital', catName: 'Dijital', desc: 'Kullanıcı dostu arayüz.', color: 'bg-white/5' },
-    { id: 6, title: 'Kurumsal Çekimler', category: 'production', catName: 'Prodüksiyon', desc: 'Holding merkezi çekimleri.', color: 'bg-brand-dark' }
-  ];
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const query = `*[_type == "project"]{
+          _id,
+          title,
+          category,
+          shortDescription,
+          description,
+          images
+        }`;
+        const data = await client.fetch(query);
+        setProjects(data);
+      } catch (error) {
+        console.error("Projeler yüklenirken hata oluştu:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  const getCategoryName = (catId: string) => {
+    return categories.find(c => c.id === catId)?.name || catId;
+  };
 
   const filteredProjects = filter === 'all' ? projects : projects.filter(p => p.category === filter);
 
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-brand-dark text-white">
+    <div className="pt-24 pb-20 min-h-screen bg-brand-dark text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
@@ -46,26 +78,53 @@ const Projects = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="group relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-brand-red/30 transition-all duration-500 hover:-translate-y-2">
-              <div className={`h-64 ${project.color} flex items-center justify-center relative overflow-hidden`}>
-                <span className="text-white/20 text-3xl font-bold">{project.catName}</span>
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-brand-dark/60 backdrop-blur-sm">
-                    <button className="bg-brand-red text-white p-4 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                        <ArrowUpRight size={24} />
-                    </button>
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <Loader2 className="animate-spin text-brand-red" size={48} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProjects.map((project) => (
+              <div 
+                key={project._id} 
+                onClick={() => setSelectedProject(project)}
+                className="group relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-brand-red/30 transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+              >
+                <div className="h-64 bg-brand-dark/50 flex items-center justify-center relative overflow-hidden">
+                  {project.images && project.images.length > 0 ? (
+                    <img 
+                      src={urlFor(project.images[0]).width(600).url()} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                  ) : (
+                    <span className="text-white/20 text-3xl font-bold">{getCategoryName(project.category)}</span>
+                  )}
+                  
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-brand-dark/60 backdrop-blur-sm">
+                      <button className="bg-brand-red text-white p-4 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                          <ArrowUpRight size={24} />
+                      </button>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <span className="text-xs font-bold text-brand-red uppercase mb-2 block">{getCategoryName(project.category)}</span>
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-brand-red transition-colors">{project.title}</h3>
+                  <p className="text-brand-gray text-sm line-clamp-2">{project.shortDescription}</p>
                 </div>
               </div>
-              <div className="p-6">
-                <span className="text-xs font-bold text-brand-red uppercase mb-2 block">{project.catName}</span>
-                <h3 className="text-xl font-bold mb-2 group-hover:text-brand-red transition-colors">{project.title}</h3>
-                <p className="text-brand-gray text-sm">{project.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
+
+      {/* Detail Modal */}
+      {selectedProject && (
+        <ProjectModal 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
+      )}
     </div>
   );
 };
