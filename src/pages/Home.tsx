@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <div className="flex flex-col min-h-screen bg-brand-dark text-white selection:bg-brand-red selection:text-white">
       {/* Hero Section with Glassmorphism */}
-      <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+      <section className="relative h-screen min-h-[700px] flex items-center pt-32 overflow-hidden">
         
         {/* Background Elements */}
         <div className="absolute inset-0 z-0">
