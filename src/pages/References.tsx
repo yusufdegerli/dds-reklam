@@ -12,14 +12,14 @@ const References = () => {
   return (
     <div className="pt-24 pb-20 min-h-screen bg-brand-dark text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
+        <div className="text-center mb-20 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
           <h1 className="text-4xl font-bold mb-4">Referanslarımız</h1>
           <p className="text-brand-gray">Başarı hikayelerini birlikte yazdığımız değerli iş ortaklarımız.</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 mb-24 items-center">
           {referenceLogos.map((logo, idx) => (
-            <div key={idx} className="group bg-[#242435] p-4 sm:p-8 rounded-2xl border border-white/5 flex items-center justify-center transition-all duration-500 hover:bg-[#2a2a3f] hover:border-brand-red/30 hover:-translate-y-2 h-32 sm:h-48 shadow-xl">
+            <div key={idx} className="group bg-[#242435] p-4 sm:p-8 rounded-2xl border border-white/5 flex items-center justify-center transition-all duration-500 hover:bg-[#2a2a3f] hover:border-brand-red/30 hover:-translate-y-2 h-32 sm:h-48 shadow-xl opacity-0 animate-fade-in-up" style={{ animationDelay: `${0.3 + (idx * 0.05)}s`, animationFillMode: 'forwards' }}>
               <img 
                 src={`/references/${logo}`} 
                 alt={logo.split('.')[0]} 
@@ -29,7 +29,7 @@ const References = () => {
           ))}
         </div>
 
-        <div className="bg-white/5 backdrop-blur-md rounded-3xl p-12 relative overflow-hidden border border-white/10">
+        <div className="bg-white/5 backdrop-blur-md rounded-3xl p-12 relative overflow-hidden border border-white/10 opacity-0 animate-fade-in-up" style={{ animationDelay: '1.0s', animationFillMode: 'forwards' }}>
             <div className="absolute top-0 right-0 opacity-5 transform translate-x-1/3 -translate-y-1/3 text-white">
                 <Quote size={400} />
             </div>
@@ -39,7 +39,7 @@ const References = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
                 {testimonials.map((t, idx) => (
-                    <div key={idx} className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-brand-red/10 transition-colors">
+                    <div key={idx} className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-brand-red/10 transition-colors opacity-0 animate-fade-in-up" style={{ animationDelay: `${1.2 + (idx * 0.1)}s`, animationFillMode: 'forwards' }}>
                         <div className="text-brand-red mb-6">
                             <Quote size={32} />
                         </div>

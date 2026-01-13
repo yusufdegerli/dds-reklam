@@ -49,7 +49,7 @@ const Services = () => {
   return (
     <div className="pt-24 pb-20 min-h-screen bg-brand-dark text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
           <h1 className="text-4xl font-bold mb-4">Hizmetlerimiz</h1>
           <p className="text-brand-gray max-w-2xl mx-auto">Markanız için 360 derece yaratıcı ve stratejik reklam çözümleri.</p>
         </div>
@@ -58,7 +58,8 @@ const Services = () => {
           {services.map((service, idx) => (
             <div 
               key={idx} 
-              className="group p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-red/30 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden"
+              className="group p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-red/30 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden opacity-0 animate-fade-in-up"
+              style={{ animationDelay: `${0.3 + (idx * 0.1)}s`, animationFillMode: 'forwards' }}
             >
               <div className={`mb-6 inline-block p-4 rounded-xl ${service.color} ${service.iconColor}`}>
                 {service.icon}

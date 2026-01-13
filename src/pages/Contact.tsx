@@ -46,17 +46,17 @@ const Contact = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
             İletişime <span className="text-brand-red">Geçin</span>
           </h1>
-          <p className="text-brand-gray text-lg max-w-2xl mx-auto">
+          <p className="text-brand-gray text-lg max-w-2xl mx-auto opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
             Projeleriniz için bir kahve içmeye ne dersiniz? Ofisimize bekleriz.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Contact Info Card (Glass) */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl h-full flex flex-col justify-between group hover:border-brand-red/30 transition-colors duration-500">
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl h-full flex flex-col justify-between group hover:border-brand-red/30 transition-colors duration-500 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
             <div>
               <h2 className="text-2xl font-bold text-white mb-8">İletişim Bilgileri</h2>
               
@@ -110,7 +110,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form (Glass) */}
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
             {status === 'success' && (
               <div className="absolute inset-0 z-50 bg-brand-dark/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-8 animate-fade-in">
                 <CheckCircle size={64} className="text-green-500 mb-4" />

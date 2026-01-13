@@ -58,12 +58,12 @@ const Projects = () => {
     <div className="pt-24 pb-20 min-h-screen bg-brand-dark text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div>
+          <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
              <h1 className="text-4xl font-bold mb-2">Projelerimiz</h1>
              <p className="text-brand-gray">Yaratıcılığımızı konuşturduğumuz işler.</p>
           </div>
           
-          <div className="flex gap-2 mt-6 md:mt-0 overflow-x-auto pb-2">
+          <div className="flex gap-2 mt-6 md:mt-0 overflow-x-auto pb-2 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
             {categories.map(cat => (
               <button
                 key={cat.id}
@@ -84,11 +84,12 @@ const Projects = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project, idx) => (
               <div 
                 key={project._id} 
                 onClick={() => setSelectedProject(project)}
-                className="group relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-brand-red/30 transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+                className="group relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-brand-red/30 transition-all duration-500 hover:-translate-y-2 cursor-pointer opacity-0 animate-fade-in-up"
+                style={{ animationDelay: `${0.5 + (idx * 0.1)}s`, animationFillMode: 'forwards' }}
               >
                 <div className="h-64 bg-brand-dark/50 flex items-center justify-center relative overflow-hidden">
                   {project.images && project.images.length > 0 ? (
