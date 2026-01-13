@@ -2,7 +2,7 @@ import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
 // Environment variable'lardan okuyacak
-export const projectId = import.meta.env.VITE_SANITY_PROJECT_ID;
+export const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || 'placeholder';
 export const dataset = import.meta.env.VITE_SANITY_DATASET || 'production';
 
 export const client = createClient({
